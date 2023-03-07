@@ -34,8 +34,8 @@ jobs:
     - name: Publish Playbook Artifact
       uses: actions/upload-artifact@v2
       with: 
-      name: playbooks
-      path: ansible #replace with whatever folders our ansible files are in
+        name: playbooks
+        path: ansible #replace with whatever folders our ansible files are in
       
   connect_to_azure:
     runs-on: ubuntu-latest
