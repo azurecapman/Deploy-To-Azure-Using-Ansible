@@ -8,6 +8,10 @@ on:
   pull_request:
   workflow_dispatch:
 
+permissions:
+      id-token: write
+      contents: read
+
 jobs:
   lint:
     name: Lint Ansible Playbook
@@ -33,11 +37,26 @@ jobs:
       name: playbooks
       path: ansible #replace with whatever folders our ansible files are in
       
+  connect_to_azure:
+    runs-on: ubuntu-latest
+    steps:
+    - name: 'Az CLI login'
+      uses: azure/login@v1
+      with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+  
+    - name: 'Run Azure CLI commands'
+      run: |
+          az account show
+          az group list
+          pwd 
 
   deploy_to_test: 
     name: Deploy to test
     runs-on: ubuntu-latest
-    needs: linting
+    needs: lint
     
   #Test Deployment Steps
     steps: 
