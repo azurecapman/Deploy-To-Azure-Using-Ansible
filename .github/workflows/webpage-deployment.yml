@@ -59,43 +59,32 @@ jobs:
     needs: lint
     
   #Test Deployment Steps
-    steps: 
-      - name: print current working directory
-        run:
-          pwd
-      - name: list directory content
-        run: 
-          ls -lart
-      - name: list directory contents of directory one level up
-        run: 
-        cd: ..
-          ls -lart
-        
-      - name: Download Artifact
-        uses: actions/download-artifact@v2
-        with: 
-          name: playbooks
-          path: ansible
-      
-      - name: Run playbook
-        uses: #insert our playbook repo
-        env: 
-          region: ${{ vars.region }}
-          access_key: ${{ secrets.access_key }}
-          secret_key: ${{ secrets.secret_key }}
-        with: 
-          playbook: ansible/deploy-ec2.yml
-          options:
-            --verbose
-      
+  #  steps: 
+   #   - name: print current working directory
+  #      run:
+ #         pwd
+#      - name: list directory content
+      #  run: 
+     #     ls -lart
+    #  - name: list directory contents of directory one level up
+   #     run: 
+  #      cd: ..
+ #         ls -lart
+#        
+      #- name: Download Artifact
+     #   uses: actions/download-artifact@v2
+    #    with: 
+   #       name: playbooks
+  #        path: ansible
+ #     
+#      - name: Run playbook
+        #uses: #insert our playbook repo
+       # env: 
+      #    region: ${{ vars.region }}
+     #     access_key: ${{ secrets.access_key }}
+    #      secret_key: ${{ secrets.secret_key }}
+   #     with: 
+  #        playbook: ansible/deploy-ec2.yml
+ #         options:
+#            --verbose
 
-
-      
-
-   
-    
-    
-    
-    
-    
-    
